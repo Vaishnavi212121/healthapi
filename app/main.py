@@ -1,10 +1,15 @@
 from fastapi import FastAPI
 from app.routers.health_router import router
+from app.middleware.logging_middleware import logging_middleware
+from app.settings import settings
 
 app = FastAPI(
-    title="System Health API",
-    version="1.0.0"
+    title=settings.app_name,
+    version=settings.app_version
 )
+
+
+app.middleware("http")(logging_middleware)
 
 app.include_router(router)  #Connect the router to main.py
 

@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine
+from app.settings import settings
 
-
-DATABASE_URL = "sqlite:///./healthapi.db"
-
+#DATABASE_URL = "sqlite:///./healthapi.db"
 
 engine = create_engine(
-    DATABASE_URL,
+    #DATABASE_URL,
+    settings.database_url,
     connect_args={"check_same_thread": False}
 )
 

@@ -1,5 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,Depends
 from fastapi.responses import JSONResponse
+
+
+from app.dependencies.health_dependencies import get_settings
 
 from app.schemas.health_schema import (
     HealthResponse,
@@ -19,15 +22,14 @@ router = APIRouter()
     "/health",
     response_model=HealthResponse
 )
-def health():
+def health(settings=Depends(get_settings)):
     return get_health_status()
-
 
 @router.get(
     "/ready",
     response_model=ReadinessResponse
 )
-def ready():
+def ready(settings=Depends(get_settings)):
     result = get_readiness_status()
 
     if result["status"] == "not_ready":
