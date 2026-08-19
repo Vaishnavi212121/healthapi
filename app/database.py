@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from app.settings import settings
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 #DATABASE_URL = "sqlite:///./healthapi.db"
 
@@ -9,6 +10,13 @@ engine = create_engine(
     connect_args={"check_same_thread": False}
 )
 
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+Base = declarative_base()
 
 def check_database():
     try:
