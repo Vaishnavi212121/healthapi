@@ -1,12 +1,24 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers.health_router import router
 from app.middleware.logging_middleware import logging_middleware
 from app.settings import settings
 from app.routers.auth_router import router as auth_router
 
 app = FastAPI(
-    title=settings.app_name,
-    version=settings.app_version
+    title="System Health API",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:9000",
+        "http://127.0.0.1:9000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
