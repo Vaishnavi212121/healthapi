@@ -5,14 +5,13 @@ from app.security import hash_password, verify_password
 
 def get_user_by_username(
     db: Session,
-    username: str
+    username: str #take username
 ):
-    return (
-        db.query(User)
-        .filter(User.username == username)
+    return ( #Search the user table for this username and return the user if found.
+        db.query(User) #Query the User table.
+        .filter(User.username == username) #Only find a row where username matches.
         .first()
     )
-
 
 def create_user(
     db: Session,
@@ -63,8 +62,8 @@ def authenticate_user(
 
 def change_user_password(
     user: User,
-    new_password: str
+    new_password: str #takes the current user and new password.
 ):
     user.password_hash = hash_password(
-        new_password
+        new_password #hashes the new password and replaces the old hash.
     )

@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta, timezone
 
-from jose import jwt
+from jose import jwt 
 
 from app.settings import settings
 
-
+#create JWT access tokens.
 def create_access_token(
     user_id: int,
     username: str,

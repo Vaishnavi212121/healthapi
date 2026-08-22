@@ -32,7 +32,7 @@ router = APIRouter(
 )
 def register(
     request: RegisterRequest,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db) #dependency injection
 ):
     user = create_user(
         db=db,
